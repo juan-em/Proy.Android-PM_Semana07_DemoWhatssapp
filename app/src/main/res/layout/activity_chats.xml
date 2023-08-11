@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".chats"
     android:orientation="vertical">
+    <include layout="@layout/mitoolbar"
+        android:id="@+id/mitoolbar">
+    </include>
 
     <LinearLayout
         android:layout_width="match_parent"

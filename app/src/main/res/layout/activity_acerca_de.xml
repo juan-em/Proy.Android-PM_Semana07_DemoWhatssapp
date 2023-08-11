@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".acerca_de"
     android:orientation="vertical">
+    <include layout="@layout/mitoolbar"
+        android:id="@+id/mitoolbar">
+    </include>
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"

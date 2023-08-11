@@ -7,5 +7,8 @@ class ajustes : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ajustes)
+        setSupportActionBar(findViewById(R.id.mitoolbar))
+        //supportActionBar?.setHomeAsUpIndicator(android.R.drawable.ic_menu_preferences)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 }

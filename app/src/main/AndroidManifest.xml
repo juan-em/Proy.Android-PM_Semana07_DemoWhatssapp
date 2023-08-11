@@ -14,9 +14,20 @@
         android:theme="@style/Theme.DemoWhatsApp"
         tools:targetApi="31">
         <activity
+            android:name=".hacer_chat"
+            android:exported="false" />
+        <activity
+            android:name=".ListaCardView"
+            android:exported="false" />
+        <activity
+            android:name=".tabs"
+            android:exported="false"
+            android:label="@string/title_activity_tabs"
+            android:theme="@style/Theme.DemoWhatsApp.NoActionBar" />
+        <activity
             android:name=".chats"
             android:exported="true"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".acerca_de"
             android:exported="true"

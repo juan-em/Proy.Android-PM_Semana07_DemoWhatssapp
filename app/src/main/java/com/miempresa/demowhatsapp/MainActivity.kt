@@ -8,45 +8,42 @@ import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabItem
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        lista_chats.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-        lista_chats.layoutManager = LinearLayoutManager(this)
 
-        var llenarLista = ArrayList<Elementos>()
-        var imagen_list:MutableList<Bitmap> = mutableListOf(
-            BitmapFactory.decodeResource(resources,R.drawable.profile),
-            BitmapFactory.decodeResource(resources,R.drawable.profile1),
-            BitmapFactory.decodeResource(resources,R.drawable.profile2),
-            BitmapFactory.decodeResource(resources,R.drawable.profile3),
-            BitmapFactory.decodeResource(resources,R.drawable.profile4),
-            BitmapFactory.decodeResource(resources,R.drawable.profile5),
-            )
-        var nombres_list:MutableList<String> = mutableListOf("Sharona","Veronica","Bree","Philippe","Peria","Audre","Evaleen","Neils","Philis","Leonerd","Rubie","Joli","Rachael","Cazzie","Egor","Eduard","Dorothy","Lucretia","Glenn","Jilleen","Gabi","Kendra","Pail","Antonina","Jonah","Rex","Shae","Briny","Webster","Beck","Aila","Frazier","Barrett","Annecorinne","Fabiano","Sheppard","Ag","Hulda","Farlee","Brinna")
-        var min = 59
-        for (i in 1..12){
-            llenarLista.add(
-                Elementos(
-                    imagen_list[(0..5).random()],
-                    nombres_list[(0..nombres_list.size-1).random()],
-                    "soy el mensaje del chat "+i,
-                    "10:"+min+" p.m.",
-                    (1..12).random().toString()
-                )
-            )
-            min -= (1..6).random()
-        }
-        val adapter = AdaptadorElementos(llenarLista)
-        lista_chats.adapter = adapter
+        setSupportActionBar(findViewById(R.id.mitoolbar))
+        supportActionBar?.setHomeAsUpIndicator(android.R.drawable.ic_menu_sort_by_size)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        registerForContextMenu(lista_chats)
+        val navigableView: NavigationView = findViewById(R.id.nav_view)
+        navigableView.setNavigationItemSelectedListener(this)
+
+        val tab_layout = findViewById<TabLayout>(R.id.tab_layout)
+        val viewPager = findViewById<ViewPager2>(R.id.pager)
+        val lista_tabs = arrayOf("Chats","Estados","Llamadas")
+        val pageController = PagerController(this)
+        viewPager.adapter = pageController
+        TabLayoutMediator(tab_layout, viewPager) { tab, position ->
+            tab.text = lista_tabs[position]
+        }.attach()
+
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menuprincipal,menu)
@@ -76,6 +73,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(llamaactividad)
             return true
         }
+        if (id==android.R.id.home){
+            layout_lateral.openDrawer(GravityCompat.START)
+            return true
+        }
+
         return super.onOptionsItemSelected(item)
     }
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.nav_cuenta-> Toast.makeText(this,"Elegiste Cuenta", Toast.LENGTH_LONG).show()
+            R.id.nav_chats-> Toast.makeText(this,"Elegiste Chats", Toast.LENGTH_LONG).show()
+            R.id.nav_notificaciones-> Toast.makeText(this,"Elegiste Notificaciones", Toast.LENGTH_LONG).show()
+            R.id.nav_datause-> Toast.makeText(this,"Elegiste Uso de datos", Toast.LENGTH_LONG).show()
+            R.id.nav_help-> Toast.makeText(this,"Elegiste Informacion y ayuda", Toast.LENGTH_LONG).show()
+            R.id.nav_contacts-> Toast.makeText(this,"Elegiste Contactos", Toast.LENGTH_LONG).show()
+        }
+        return true
+    }
+
 }

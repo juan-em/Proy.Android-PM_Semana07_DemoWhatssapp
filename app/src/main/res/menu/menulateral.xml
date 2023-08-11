@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/cuenta"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_cuenta"
+            android:icon="@drawable/llave"
+            android:checked="true"
+            android:title="Cuenta" />
+    <item
+        android:id="@+id/nav_chats"
+        android:icon="@drawable/chat"
+        android:title="Chats" />
+    <item
+        android:id="@+id/nav_notificaciones"
+        android:icon="@drawable/notificaciones"
+        android:title="Notificaciones" />
+    <item
+        android:id="@+id/nav_datause"
+        android:icon="@drawable/proceso"
+        android:title="Uso de datos" />
+    <item
+        android:id="@+id/nav_help"
+        android:icon="@drawable/ayuda"
+        android:title="Información y ayuda" />
+    <item
+            android:id="@+id/nav_contacts"
+            android:icon="@drawable/users"
+            android:title="Contactos" />
+    </group>
+
+</menu>
